@@ -48,7 +48,6 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 
   const url = `${req.protocol}://${req.get('host')}/me`;
-  console.log(url);
   await new Email(newUser, url).sendWelcome();
 
   createSendToken(newUser, 201, res);
@@ -95,7 +94,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     token = req.cookies.jwt;
   }
 
-  console.log(token);
+  // console.log(token);
 
   if (!token) {
     return next(
@@ -106,7 +105,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   // 2) Verification token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   //same as jwt.verify(token, process.env.JWT_SECRET));
-  console.log(decoded);
+  // console.log(decoded);
 
   // 3) Check if user still exists
   const currentUser = await User.findById(decoded.id);
@@ -203,7 +202,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 3) Send it to user's email
   try {
     const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`;
-    console.log('resetURL: ', resetURL);
+    // console.log('resetURL: ', resetURL);
     await new Email(user, resetURL).sendPasswordReset();
 
     res.status(200).json({

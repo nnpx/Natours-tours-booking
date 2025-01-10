@@ -13,7 +13,7 @@ const userPasswordForm = document.querySelector('.form-user-password');
 // DELEGATION
 if (leaflet) {
   const locations = JSON.parse(leaflet.dataset.locations);
-  console.log(locations);
+  // console.log(locations);
   displayMap(locations);
 }
 
@@ -37,7 +37,7 @@ if (userDataForm)
     form.append('name', document.getElementById('name').value);
     form.append('email', document.getElementById('email').value);
     form.append('photo', document.getElementById('photo').files[0]);
-    console.log(form);
+    // console.log(form);
 
     updateSettings(form, 'data');
   });

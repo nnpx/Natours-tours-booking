@@ -2,6 +2,7 @@ import '@babel/polyfill';
 import { displayMap } from './leaflet';
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
+import { signup } from './signup';
 
 //DOM
 const leaflet = document.getElementById('map');
@@ -9,6 +10,7 @@ const loginForm = document.querySelector('.form--login');
 const logoutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
+const signupForm = document.querySelector('.form--signup');
 
 // DELEGATION
 if (leaflet) {
@@ -28,6 +30,18 @@ if (loginForm) {
 
 if (logoutBtn) {
   logoutBtn.addEventListener('click', logout);
+}
+
+if (signupForm) {
+  signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.log('signupForm');
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('password-confirm').value;
+    signup(name, email, password, confirmPassword);
+  });
 }
 
 if (userDataForm)
